@@ -6,7 +6,7 @@ const loader = document.querySelector('.loader');
 
 // NASA API
 const count = 10;
-const apiKey = 'iFuDfEsNQnSaVJLB5atOSbx1DCA7psURrTQBfIDS';
+const apiKey = process.env.API_KEY;
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=${count}`;
 
 let resultsArray = [];
@@ -27,7 +27,8 @@ const showContent = (page) => {
 
 const createDOMNodes = (page) => {
   // Load ResultsArray or Favorites
-  const currentArray = page === 'results' ? resultsArray : Object.values(favorites);
+  const currentArray =
+    page === 'results' ? resultsArray : Object.values(favorites);
   currentArray.forEach((result) => {
     // Card Container
     const card = document.createElement('div');
@@ -71,7 +72,8 @@ const createDOMNodes = (page) => {
     const date = document.createElement('strong');
     date.textContent = result.date;
     // Copyright
-    const copyrightResult = result.copyright === undefined ? '' : result.copyright;
+    const copyrightResult =
+      result.copyright === undefined ? '' : result.copyright;
     const copyright = document.createElement('span');
     copyright.textContent = ` ${copyrightResult}`;
     // Append
